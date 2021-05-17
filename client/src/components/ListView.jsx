@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ListItem from './ListItem.jsx';
 
 export default () => {
   const [ nftList, setNftList ] = useState([]);
-  const [ currentPage, setCurrentPage ] = useState(0);
+  const [ currentPage, setCurrentPage ] = useState(1);
 
   useEffect(() => {
     axios.get(`/nfts?page=${currentPage}`)
       .then(res => {
-        console.log(res.data);
-        // setNftList(res.data);
+        setNftList(res.data);
+      })
+      .catch(err => {
+        console.error(err);
       });
 
     return () => setNftList([]);
   }, [ currentPage ]);
 
-  return <h1>hello from ListView</h1>
+  return (
+    <div>
+      {
+        nftList.length > 0
+        ? nftList.map(nft => {
+          return <ListItem
+            key={nft.id}
+            name={nft.name} />
+        })
+        : null
+      }
+    </div>
+  )
 };
