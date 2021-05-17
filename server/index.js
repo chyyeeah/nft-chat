@@ -3,10 +3,16 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const morgan = require('morgan');
+const axios = require('axios');
 
 const app = express();
 
 app.use(morgan('dev'));
+app.use(express.static(path.resolve('client/dist')));
+
+app.get('/nfts', (req, res) => {
+  // https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20
+});
 
 app.get('**', (req, res) => res.sendFile(path.resolve('client/dist/index.html')));
 
