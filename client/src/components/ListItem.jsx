@@ -1,9 +1,15 @@
 import React from 'react';
 
-export default ({ name }) => {
+export default ({ name, description, preview }) => {
   return (
     <div>
-      {name}
+      <div>
+        <img src={preview} alt={name}></img>
+      </div>
+      <div>
+        <h3>{name}</h3>
+        <p>{description}</p>
+      </div>
     </div>
   );
 };
