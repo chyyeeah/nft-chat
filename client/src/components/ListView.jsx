@@ -25,7 +25,9 @@ export default () => {
         ? nftList.map(nft => {
           return <ListItem
             key={nft.id}
-            name={nft.name} />
+            name={nft.name}
+            description={nft.description}
+            preview={nft.image_preview_url} />
         })
         : null
       }
